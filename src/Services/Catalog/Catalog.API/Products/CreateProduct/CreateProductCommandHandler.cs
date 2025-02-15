@@ -1,6 +1,6 @@
 namespace Catalog.API.Products.CreateProduct;
 
-public class CreateProductCommandHandler(IDocumentSession session, IMediator mediator)
+public class CreateProductCommandHandler(IDocumentSession session)
     : ICommandHandler<CreateProductCommand, CreateProductResult>
 {
     public async Task<CreateProductResult> Handle(CreateProductCommand request,
@@ -12,7 +12,8 @@ public class CreateProductCommandHandler(IDocumentSession session, IMediator med
             Name = request.Name,
             Description = request.Description,
             Category = request.Category,
-            ImageFile = request.ImageFile
+            ImageFile = request.ImageFile,
+            Price = request.Price,
         };
 
         session.Store(product);

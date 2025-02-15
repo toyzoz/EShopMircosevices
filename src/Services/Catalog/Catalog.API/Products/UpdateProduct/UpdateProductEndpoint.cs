@@ -1,6 +1,5 @@
-﻿namespace Catalog.API.Products.UpdateProduct
+﻿namespace Catalog.API.Products.UpdateProduct;
+
+public class UpdateProductEndpoint
 {
-    public class UpdateProductEndpoint
-    {
-    }
 }

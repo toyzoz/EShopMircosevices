@@ -1,6 +1,5 @@
-﻿namespace Catalog.API.Products.GetProductByCategory
+﻿namespace Catalog.API.Products.GetProductByCategory;
+
+public class GetProductByCategoryEndpoint
 {
-    public class GetProductByCategoryEndpoint
-    {
-    }
 }

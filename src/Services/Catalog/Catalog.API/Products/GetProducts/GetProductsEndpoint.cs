@@ -1,6 +1,9 @@
-﻿namespace Catalog.API.Products.GetProducts
+﻿namespace Catalog.API.Products.GetProducts;
+
+public class GetProductsEndpoint : ICarterModule
 {
-    public class GetProductsEndpoint
+    public void AddRoutes(IEndpointRouteBuilder app)
     {
+        app.MapGet("products", () => "hello world carter");
     }
 }

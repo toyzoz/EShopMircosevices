@@ -1,26 +1,40 @@
-using JasperFx;
+using Catalog.API.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var assembly = typeof(Program).Assembly;
+//=================================
 builder.Services.AddCarter(configurator: c =>
 {
-    var types = typeof(Program).Assembly.GetTypes();
+    var types = assembly.GetTypes();
     var modules = types.Where(t =>
             typeof(ICarterModule).IsAssignableFrom(t) && t is { IsAbstract: false, IsInterface: false })
         .ToArray();
     c.WithModules(modules);
 });
-builder.Services.AddMediatR(config => { config.RegisterServicesFromAssembly(typeof(Program).Assembly); });
-builder.Services.AddMarten(opt =>
+//=================================
+builder.Services.AddMediatR(config =>
 {
-    opt.Connection(builder.Configuration.GetConnectionString("DefaultConnection") ?? string.Empty);
-    opt.AutoCreateSchemaObjects = AutoCreate.CreateOrUpdate;
-}).UseLightweightSessions();
+    config.RegisterServicesFromAssembly(assembly);
+    config.AddOpenBehavior(typeof(ValidationBehavior<,>));
+    config.AddOpenBehavior(typeof(LoggingBehavior<,>));
+});
+builder.Services.AddValidatorsFromAssembly(assembly);
+//=================================
+builder.Services.AddMarten(opt => { opt.Connection(builder.Configuration.GetConnectionString("Database")!); })
+    .UseLightweightSessions();
+
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.InitializeMartenWith<CatalogInitialData>();
+}
+
+//=================================
+builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
 var app = builder.Build();
 
 
-app.MapGet("/", () => "Hello World!");
 app.MapCarter();
-
+app.UseExceptionHandler(opt => { });
 app.Run();

@@ -6,4 +6,7 @@ services:
       dockerfile: Services/Catalog/Catalog.API/Dockerfile
 
   catalogdb:
-    image: postgres  
+    image: postgres
+volumes:
+  postgres_catalog:
+  postgres_basket:    

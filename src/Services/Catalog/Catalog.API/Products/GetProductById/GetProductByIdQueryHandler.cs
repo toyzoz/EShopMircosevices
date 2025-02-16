@@ -7,7 +7,7 @@ public class GetProductByIdQueryHandler(IDocumentSession session)
         CancellationToken cancellationToken)
     {
         var product = await session.LoadAsync<Product>(request.Id, cancellationToken);
-        if (product == null) throw new ProductNotFoundException();
+        if (product == null) throw new ProductNotFoundException(request.Id);
 
         return new GetProductByIdResult(product);
     }

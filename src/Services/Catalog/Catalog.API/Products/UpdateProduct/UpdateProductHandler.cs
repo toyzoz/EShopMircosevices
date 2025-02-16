@@ -7,7 +7,7 @@ public class UpdateProductHandler(IDocumentSession session)
         CancellationToken cancellationToken)
     {
         var product = await session.LoadAsync<Product>(request.Id, cancellationToken);
-        if (product == null) throw new ProductNotFoundException();
+        if (product == null) throw new ProductNotFoundException(request.Id);
 
         product.Name = request.Name;
         product.Description = request.Description;
@@ -18,6 +18,21 @@ public class UpdateProductHandler(IDocumentSession session)
         await session.SaveChangesAsync(cancellationToken);
 
         return new UpdateProductResult(true);
+    }
+}
+
+public class UpdateProductCommandValidator : AbstractValidator<UpdateProductCommand>
+{
+    public UpdateProductCommandValidator()
+    {
+        RuleFor(p => p.Id).NotEmpty().WithMessage("Id is required");
+
+        RuleFor(p => p.Name).NotEmpty().WithMessage("Name is required")
+            .Length(2, 150).WithMessage("Name must be between 2 and 150 characters");
+
+        RuleFor(p => p.Description).NotEmpty().WithMessage("Description is required");
+        RuleFor(p => p.ImageFile).NotEmpty().WithMessage("ImageFile is required");
+        RuleFor(p => p.Price).GreaterThan(0).WithMessage("Price must be greater than 0");
     }
 }
 

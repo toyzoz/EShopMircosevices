@@ -21,7 +21,8 @@ public class UpdateProductEndpoint : ICarterModule
     }
 }
 
-public record UpdateProductRequest(Guid Id,
+public record UpdateProductRequest(
+    Guid Id,
     string Name,
     string Description,
     decimal Price,

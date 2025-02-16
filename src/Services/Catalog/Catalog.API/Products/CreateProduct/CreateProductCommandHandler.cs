@@ -1,5 +1,3 @@
-using ValidationException = System.ComponentModel.DataAnnotations.ValidationException;
-
 namespace Catalog.API.Products.CreateProduct;
 
 public class CreateProductCommandHandler(IDocumentSession session)
@@ -15,7 +13,7 @@ public class CreateProductCommandHandler(IDocumentSession session)
             Description = request.Description,
             Category = request.Category,
             ImageFile = request.ImageFile,
-            Price = request.Price,
+            Price = request.Price
         };
 
         session.Store(product);

@@ -1,10 +1,3 @@
-using BuildingBlocks.CQRS;
-using Microsoft.EntityFrameworkCore;
-using Ordering.Application.Data;
-using Ordering.Application.Dtos;
-using Ordering.Application.Extensions;
-using Ordering.Domain.ValueObjects;
-
 namespace Ordering.Application.Orders.Queries.GetOrdersByCustomer;
 
 public record GetOrdersByCustomerQuery(Guid CustomerId) : IQuery<GetOrdersByCustomerResult>;

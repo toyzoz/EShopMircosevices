@@ -1,9 +1,3 @@
-using BuildingBlocks.CQRS;
-using Microsoft.EntityFrameworkCore;
-using Ordering.Application.Data;
-using Ordering.Application.Dtos;
-using Ordering.Application.Extensions;
-
 namespace Ordering.Application.Orders.Queries.GetOrderByName;
 
 public record GetOrderByNameQuery(string OrderName) : IQuery<GetOrderByNameResult>;

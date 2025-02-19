@@ -1,10 +1,3 @@
-using BuildingBlocks.CQRS;
-using Ordering.Application.Data;
-using Ordering.Application.Dtos;
-using Ordering.Application.Exceptions;
-using Ordering.Domain.Models;
-using Ordering.Domain.ValueObjects;
-
 namespace Ordering.Application.Orders.Commands.UpdateOrder;
 
 public class UpdateOrderCommandHandler(IApplicationDbContext dbContext)

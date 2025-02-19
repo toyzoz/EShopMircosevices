@@ -1,7 +1,3 @@
-using Carter;
-using Mapster;
-using MediatR;
-using Ordering.Application.Dtos;
 using Ordering.Application.Orders.Queries.GetOrderByName;
 
 namespace Ordering.API.Endpoints;

@@ -1,9 +1,3 @@
-using BuildingBlocks.CQRS;
-using Ordering.Application.Data;
-using Ordering.Application.Dtos;
-using Ordering.Domain.Models;
-using Ordering.Domain.ValueObjects;
-
 namespace Ordering.Application.Orders.Commands.CreateOrder;
 
 public class CreateOrderCommandHandler(IApplicationDbContext dbContext)
@@ -30,7 +24,7 @@ public class CreateOrderCommandHandler(IApplicationDbContext dbContext)
 
         var payment = Payment.Of(orderDto.Payment.CardName, orderDto.Payment.CardNumber, orderDto.Payment.Expiration,
             orderDto.Payment.Cvv, orderDto.Payment.PaymentMethod);
-        
+
         var newOrder = Order.Create(
             OrderId.Of(Guid.NewGuid()),
             CustomerId.Of(orderDto.CustomerId),

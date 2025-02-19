@@ -52,7 +52,7 @@ builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 builder.Services.AddHealthChecks()
     .AddNpgSql(connectionString!)
     .AddRedis(builder.Configuration.GetConnectionString("Redis")!)
-;
+    ;
 // add message broker
 builder.Services.AddMessageBroker(builder.Configuration);
 

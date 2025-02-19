@@ -1,4 +1,3 @@
-using BuildingBlocks.CQRS;
 using FluentValidation;
 
 namespace Ordering.Application.Orders.Commands.DeleteOrder;

@@ -1,9 +1,7 @@
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using Ordering.Domain.Abstractions;
 
-namespace Ordering.Infrastructure.Interceptors;
+namespace Ordering.Infrastructure.Data.Interceptors;
 
 public class DispatchDomainEventsInterceptor(IMediator mediator) : SaveChangesInterceptor
 {

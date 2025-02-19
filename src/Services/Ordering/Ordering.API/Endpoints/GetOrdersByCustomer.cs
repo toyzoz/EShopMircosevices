@@ -1,7 +1,3 @@
-using Carter;
-using Mapster;
-using MediatR;
-using Ordering.Application.Dtos;
 using Ordering.Application.Orders.Queries.GetOrdersByCustomer;
 
 namespace Ordering.API.Endpoints;
@@ -23,6 +19,6 @@ public class GetOrdersByCustomer : ICarterModule
     }
 }
 
-public record GetOrdersByCustomerRequest();
+public record GetOrdersByCustomerRequest;
 
 public record GetOrdersByCustomerResponse(IEnumerable<OrderDto> Orders);

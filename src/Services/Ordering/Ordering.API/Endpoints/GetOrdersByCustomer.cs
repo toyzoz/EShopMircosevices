@@ -2,6 +2,7 @@ using Carter;
 using Mapster;
 using MediatR;
 using Ordering.Application.Dtos;
+using Ordering.Application.Orders.Queries.GetOrdersByCustomer;
 
 namespace Ordering.API.Endpoints;
 
@@ -11,7 +12,7 @@ public class GetOrdersByCustomer : ICarterModule
     {
         app.MapGet("orders/{customerId:guid}", async (Guid customerId, ISender sender) =>
             {
-                var result = await sender.Send(new GetOrdersByCustomerRequest(customerId));
+                var result = await sender.Send(new GetOrdersByCustomerQuery(customerId));
                 var response = result.Adapt<GetOrdersByCustomerResponse>();
 
                 return Results.Ok(response);
@@ -22,6 +23,6 @@ public class GetOrdersByCustomer : ICarterModule
     }
 }
 
-public record GetOrdersByCustomerRequest(Guid CustomerId);
+public record GetOrdersByCustomerRequest();
 
 public record GetOrdersByCustomerResponse(IEnumerable<OrderDto> Orders);

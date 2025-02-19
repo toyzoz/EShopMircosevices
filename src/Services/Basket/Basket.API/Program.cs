@@ -1,3 +1,4 @@
+using BuildingBlocks.Messaging.Extensions;
 using Discount.Grpc;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -50,8 +51,10 @@ builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 //=================================
 builder.Services.AddHealthChecks()
     .AddNpgSql(connectionString!)
-    .AddRedis(builder.Configuration.GetConnectionString("Redis")!);
+    .AddRedis(builder.Configuration.GetConnectionString("Redis")!)
 ;
+// add message broker
+builder.Services.AddMessageBroker(builder.Configuration);
 
 var app = builder.Build();
 

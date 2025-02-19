@@ -16,6 +16,8 @@ public class OrderItemConfiguration : IEntityTypeConfiguration<OrderItem>
             v => OrderItemId.Of(v)
         );
 
+        builder.HasOne<Product>().WithMany().HasForeignKey(x => x.ProductId);
+
         builder.Property(x => x.Quantity).IsRequired();
         builder.Property(x => x.Price).IsRequired();
     }

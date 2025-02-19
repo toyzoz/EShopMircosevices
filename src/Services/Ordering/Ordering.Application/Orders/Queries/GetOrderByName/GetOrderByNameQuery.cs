@@ -4,7 +4,7 @@ using Ordering.Application.Data;
 using Ordering.Application.Dtos;
 using Ordering.Application.Extensions;
 
-namespace Ordering.Application.Orders.Queries;
+namespace Ordering.Application.Orders.Queries.GetOrderByName;
 
 public record GetOrderByNameQuery(string OrderName) : IQuery<GetOrderByNameResult>;
 
@@ -18,6 +18,7 @@ public class GetOrderByNameQueryHandler(IApplicationDbContext dbContext)
         var orderName = request.OrderName;
         var orders = await dbContext.Orders
             .Include(x => x.OrderItems)
+            .AsNoTracking()
             .Where(x => x.OrderName.Value.Contains(orderName))
             .OrderBy(x => x.OrderName.Value)
             .ToListAsync(cancellationToken);

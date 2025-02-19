@@ -12,20 +12,20 @@ services:
       context: .
       dockerfile: Services/Basket/Basket.API/Dockerfile
   
-
+  
   discount.grpc:
     image: ${DOCKER_REGISTRY-}discountgrpc
     build:
       context: .
       dockerfile: Services/Discount/Discount.Grpc/Dockerfile
   
-
+  
   ordering.api:
     image: ${DOCKER_REGISTRY-}orderingapi
     build:
       context: .
-      dockerfile: Services/Ordering/Ordering.API/Dockerfile   
-
+      dockerfile: Services/Ordering/Ordering.API/Dockerfile
+  
   catalogdb:
     image: postgres
 
@@ -40,7 +40,7 @@ services:
   
   orderdb:
     image: mcr.microsoft.com/mssql/server
-     
+
 
 volumes:
   postgres_catalog:

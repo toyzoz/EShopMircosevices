@@ -12,7 +12,6 @@ public class Product : Entity<ProductId>
         return new Product
         {
             Id = id,
-
             Name = name,
             Price = price
         };

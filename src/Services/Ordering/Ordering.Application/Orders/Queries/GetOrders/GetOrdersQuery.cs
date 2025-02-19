@@ -5,7 +5,7 @@ using Ordering.Application.Data;
 using Ordering.Application.Dtos;
 using Ordering.Application.Extensions;
 
-namespace Ordering.Application.Orders.Queries;
+namespace Ordering.Application.Orders.Queries.GetOrders;
 
 public record GetOrdersQuery(PaginatedRequest PaginatedRequest) : IQuery<GetOrdersResult>;
 

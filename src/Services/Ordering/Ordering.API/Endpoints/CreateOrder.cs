@@ -2,7 +2,7 @@ using Carter;
 using Mapster;
 using MediatR;
 using Ordering.Application.Dtos;
-using Ordering.Application.Orders.Commands;
+using Ordering.Application.Orders.Commands.CreateOrder;
 
 namespace Ordering.API.Endpoints;
 
@@ -16,7 +16,7 @@ public class CreateOrder : ICarterModule
                 var result = await sender.Send(command);
                 var res = result.Adapt<CreateOrderResponse>();
 
-                return Results.Created($"/order/{res.OrderId}", res);
+                return Results.Created($"/order/{res.Id}", res);
             })
             .WithName("create order").WithDescription("create order").WithSummary("create order")
             .Produces<CreateOrderResponse>(StatusCodes.Status201Created)
@@ -26,4 +26,4 @@ public class CreateOrder : ICarterModule
 
 public record CreateOrderRequest(OrderDto Order);
 
-public record CreateOrderResponse(Guid OrderId);
+public record CreateOrderResponse(Guid Id);

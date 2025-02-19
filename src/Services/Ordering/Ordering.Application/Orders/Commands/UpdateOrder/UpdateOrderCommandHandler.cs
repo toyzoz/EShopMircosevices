@@ -1,26 +1,11 @@
 using BuildingBlocks.CQRS;
-using FluentValidation;
 using Ordering.Application.Data;
 using Ordering.Application.Dtos;
 using Ordering.Application.Exceptions;
 using Ordering.Domain.Models;
 using Ordering.Domain.ValueObjects;
 
-namespace Ordering.Application.Orders.Commands;
-
-public record UpdateOrderCommand(OrderDto Order) : ICommand<UpdateOrderResult>;
-
-public record UpdateOrderResult(bool IsSuccess);
-
-public class UpdateOrderCommandValidator : AbstractValidator<UpdateOrderCommand>
-{
-    public UpdateOrderCommandValidator()
-    {
-        RuleFor(x => x.Order.Id).NotEmpty().WithMessage("Id is required");
-        RuleFor(x => x.Order.OrderName).NotEmpty().WithMessage("Name is required");
-        RuleFor(x => x.Order.CustomerId).NotNull().WithMessage("CustomerId is required");
-    }
-}
+namespace Ordering.Application.Orders.Commands.UpdateOrder;
 
 public class UpdateOrderCommandHandler(IApplicationDbContext dbContext)
     : ICommandHandler<UpdateOrderCommand, UpdateOrderResult>

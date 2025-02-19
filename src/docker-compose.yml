@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: Services/Catalog/Catalog.API/Dockerfile
-
+  
   
   basket.api:
     image: ${DOCKER_REGISTRY-}basketapi
@@ -12,7 +12,20 @@ services:
       context: .
       dockerfile: Services/Basket/Basket.API/Dockerfile
   
-      
+
+  discount.grpc:
+    image: ${DOCKER_REGISTRY-}discountgrpc
+    build:
+      context: .
+      dockerfile: Services/Discount/Discount.Grpc/Dockerfile
+  
+
+  ordering.api:
+    image: ${DOCKER_REGISTRY-}orderingapi
+    build:
+      context: .
+      dockerfile: Services/Ordering/Ordering.API/Dockerfile   
+
   catalogdb:
     image: postgres
 
@@ -22,16 +35,15 @@ services:
   
   
   distributedcache:
-    image: redis  
-
-
-  discount.grpc:
-    image: ${DOCKER_REGISTRY-}discountgrpc
-    build:
-      context: .
-      dockerfile: Services/Discount/Discount.Grpc/Dockerfile
+    image: redis
+  
+  
+  orderdb:
+    image: mcr.microsoft.com/mssql/server
+     
 
 volumes:
   postgres_catalog:
   postgres_basket:    
+
 

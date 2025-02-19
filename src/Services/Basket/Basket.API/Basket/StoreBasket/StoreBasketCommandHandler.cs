@@ -21,7 +21,7 @@ public class StoreBasketCommandHandler(
         foreach (var item in cart.Items)
         {
             var coupon = await discountServiceClient.GetDiscountAsync(
-                new GetDiscountRequest() { ProductName = item.ProductName },
+                new GetDiscountRequest { ProductName = item.ProductName },
                 cancellationToken: cancellationToken
             );
             item.Price -= coupon.Amount;

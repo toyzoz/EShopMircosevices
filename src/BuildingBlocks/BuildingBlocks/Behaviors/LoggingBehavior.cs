@@ -1,6 +1,5 @@
 using System.Diagnostics;
 using MediatR;
-using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.Extensions.Logging;
 
 namespace BuildingBlocks.Behaviors;

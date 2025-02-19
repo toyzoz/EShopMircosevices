@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using FluentValidation;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
@@ -61,11 +60,9 @@ public class CustomExceptionHandler(ILogger<CustomExceptionHandler> logger)
         problemDetails.Extensions.Add("traceId", httpContext.TraceIdentifier);
 
         if (exception is ValidationException validationException)
-        {
             problemDetails.Extensions.Add("ValidationErrors", validationException.Errors);
-        }
 
-        await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken: cancellationToken);
+        await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
         return true;
     }
 }

@@ -8,10 +8,7 @@ public class CachedBasketRepository(IBasketRepository basketRepository, IDistrib
     public async Task<ShoppingCart> GetBasketAsync(string username, CancellationToken cancellationToken = default)
     {
         var cacheBasket = await cache.GetStringAsync(username, cancellationToken);
-        if (!string.IsNullOrEmpty(cacheBasket))
-        {
-            return JsonSerializer.Deserialize<ShoppingCart>(cacheBasket)!;
-        }
+        if (!string.IsNullOrEmpty(cacheBasket)) return JsonSerializer.Deserialize<ShoppingCart>(cacheBasket)!;
 
         var basket = await basketRepository.GetBasketAsync(username, cancellationToken);
         await cache.SetStringAsync(username, JsonSerializer.Serialize(basket), cancellationToken);
